@@ -1,0 +1,16 @@
+{
+  "name": "routewise-compass",
+  "version": "1.0.0",
+  "description": "A vacation-planning web application that compares travel modes, estimates time and cost, visualizes routes, and organizes destination planning.",
+  "private": true,
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "verify": "node scripts/verify-project.js",
+    "test": "node scripts/smoke-test.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "UNLICENSED"
+}

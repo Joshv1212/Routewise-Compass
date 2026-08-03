@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RouteWise Compass</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-icon">🧭</div>
+      <div><strong>RouteWise</strong><span>COMPASS</span></div>
+    </div>
+
+    <nav>
+      <button class="side-link active" data-page="plan"><span>✈</span>Plan Trip</button>
+      <button class="side-link" data-page="explore"><span>◉</span>Explore</button>
+      <button class="side-link" data-page="bookings"><span>▣</span>Bookings</button>
+      <button class="side-link" data-page="trips"><span>🗺</span>My Trips</button>
+      <button class="side-link" data-page="checklist"><span>☑</span>Checklist</button>
+      <button class="side-link" data-page="favorites"><span>♡</span>Favorites</button>
+    </nav>
+
+    <div class="adventure-card">
+      <img src="assets/adventure_card.jpg" alt="Travel backpack and vacation essentials">
+      <p>Ready for your next</p>
+      <strong>Adventure?</strong>
+      <button data-page="explore">Get Inspired</button>
+    </div>
+  </aside>
+
+  <main class="content">
+    <section id="planPage" class="page active">
+      <section class="hero">
+        <div class="hero-copy">
+          <h1>Where will you go next? ✈️</h1>
+          <p>We'll plan the perfect trip for you</p>
+        </div>
+
+        <div class="search-bar state-city-date-bar">
+          <div class="search-field"><span>◉</span><label>From State<select id="originState"></select></label></div>
+          <div class="search-field"><span>◉</span><label>From City<select id="originCity"></select></label></div>
+          <div class="search-field"><span>◉</span><label>To State<select id="destinationState"></select></label></div>
+          <div class="search-field"><span>◉</span><label>To City<select id="destinationCity"></select></label></div>
+          <div class="search-field"><span>▣</span><label>Start Date<input id="travelStartDate" type="date"></label></div>
+          <div class="search-field"><span>▣</span><label>End Date<input id="travelEndDate" type="date"></label></div>
+          <div class="search-field"><span>♙</span><label>Travelers<input id="travelers" type="number" min="1" value="2"></label></div>
+          <button id="planTripButton" class="plan-button">✦ Plan My Trip</button>
+        </div>
+      </section>
+
+      <section class="travel-section">
+        <div class="section-title">
+          <div><h2>Best Way to Travel</h2><span class="recommended-label">Recommended for you</span></div>
+          <p id="dataSourceLabel">Trip links open with your selected cities already filled in</p>
+        </div>
+        <div id="modeCards" class="mode-cards"></div>
+      </section>
+
+      <section class="main-grid">
+        <article class="card route-card">
+          <div class="card-title"><span>🚙</span><strong>Your Trip at a Glance</strong><b id="routeSource">Google Maps</b></div>
+          <div id="map" class="map-frame"><img src="assets/route_map.jpg" alt="Route map preview"></div>
+          <div class="route-stats">
+            <div><span>↗</span><b id="routeMiles">—</b><small>Total Distance</small></div>
+            <div><span>◷</span><b id="routeTime">—</b><small>Drive Time</small></div>
+            <div><span>♨</span><b id="routeCost">—</b><small>Fuel & Tolls</small></div>
+          </div>
+          <a id="fullRouteLink" class="wide-button" target="_blank" rel="noopener">Open Full Route in Google Maps ↗</a>
+        </article>
+
+        <article class="card stop-card">
+          <div class="card-title"><span>🛏</span><strong>Top Overnight Stop</strong></div>
+          <img id="stopImage" class="stop-hero" src="assets/hotel_savannah.jpg" alt="Recommended overnight stop">
+          <div class="stop-header"><div><h3 id="stopCity">Live route required</h3><p id="stopDetails">Configure Google Maps to calculate the best stop.</p></div><span class="tag">Best Stop</span></div>
+          <div class="hotel-block">
+            <img id="hotelImage" src="assets/hotel_savannah.jpg" alt="Recommended hotel">
+            <div><small>Recommended Stay</small><h4 id="hotelName">Hotel options</h4><p id="hotelRating">Open current Google results</p><b id="hotelPrice">Live price on provider</b></div>
+            <a id="hotelDealLink" class="small-button" target="_blank" rel="noopener">View Deal</a>
+          </div>
+        </article>
+
+        <article class="card attractions-card">
+          <div class="card-title"><span>🏛</span><strong id="attractionsTitle">Things to Do</strong><button data-page="explore">View all</button></div>
+          <div id="attractionList" class="attraction-list"></div>
+          <a id="moreAttractionsLink" class="outline-button" target="_blank" rel="noopener">More Attractions & Tickets ↗</a>
+        </article>
+
+        <article class="card booking-card">
+          <div class="card-title"><span>🛍</span><strong>Book Everything in One Place</strong></div>
+          <div id="bookingLinks" class="booking-options"></div>
+        </article>
+
+        <article class="card trip-check-card">
+          <div class="card-title"><span>☑</span><strong>Trip Checklist</strong><button data-page="checklist">View Full Checklist</button></div>
+          <div class="trip-check-content">
+            <div id="miniChecklist" class="mini-checklist"></div>
+            <img src="assets/checklist_luggage.jpg" alt="Luggage and travel checklist">
+          </div>
+        </article>
+      </section>
+
+      <section class="support-row">
+        <div class="support-card">
+          <img src="assets/hero_mountains.jpg" alt="Scenic vacation">
+          <div><strong>Need help with your trip?</strong><span>Use the live provider links and compare before booking.</span></div>
+          <button id="supportButton">Trip Help</button>
+        </div>
+        <div class="secure-card"><span>🛡</span><div><strong>Secure planning. Trusted providers.</strong><small>RouteWise sends booking actions to Google and provider pages.</small></div><b>SSL ✓</b></div>
+      </section>
+    </section>
+
+    <section id="explorePage" class="page">
+      <section class="vacation-page-hero explore-page-hero">
+        <div><span>Explore farther</span><h1>Find places that feel like a real vacation.</h1><p>Browse top attractions, scenic spots, neighborhoods, and extra inspiration for the destination you picked.</p></div>
+      </section>
+      <section class="page-section page-shell">
+        <div class="section-heading"><div><h2>Must-See in Your Destination</h2><p>Top things to do, based on the city selected above.</p></div><a id="exploreOfficialLink" class="text-link" target="_blank" rel="noopener">Open full destination guide ↗</a></div>
+        <div id="exploreGrid" class="library-grid visual-library compact-grid"></div>
+      </section>
+      <section class="page-section page-shell">
+        <div class="section-heading"><div><h2>Scenic Stops & Vacation Vibes</h2><p>Extra places to visit so the page always feels full and inspiring.</p></div></div>
+        <div id="exploreExtraGrid" class="library-grid visual-library compact-grid"></div>
+      </section>
+      <section class="page-section page-shell">
+        <div class="section-heading"><div><h2>Photo Inspiration</h2><p>Quick visual ideas for what the trip could feel like.</p></div></div>
+        <div id="explorePhotoWall" class="photo-wall"></div>
+      </section>
+    </section>
+    <section id="bookingsPage" class="page">
+      <section class="vacation-page-hero bookings-page-hero">
+        <div><span>Book the getaway</span><h1>Transportation, stays, and activities in one place.</h1><p>Everything below opens a live provider or official page so you can move from planning to booking fast.</p></div>
+      </section>
+      <section class="page-section page-shell">
+        <div class="section-heading"><div><h2>Booking Essentials</h2><p>Use these links to book the most important parts of the trip.</p></div></div>
+        <div id="allBookingLinks" class="library-grid visual-library compact-grid"></div>
+      </section>
+      <section class="page-section page-shell">
+        <div class="section-heading"><div><h2>Stay Options</h2><p>Recommended places to stay with a vacation feel and direct booking access.</p></div></div>
+        <div id="bookingStayGrid" class="library-grid visual-library compact-grid"></div>
+      </section>
+      <section class="page-section page-shell">
+        <div class="section-heading"><div><h2>Before You Checkout</h2><p>Quick reminders to make sure nothing important is missed.</p></div></div>
+        <div id="bookingAssistGrid" class="assist-grid"></div>
+      </section>
+      <section class="page-section page-shell booking-gallery-section">
+        <div class="section-heading"><div><h2>Your Vacation Is Coming Together</h2><p>A final visual overview of the trip pieces you can book from RouteWise.</p></div></div>
+        <div id="bookingPhotoWall" class="photo-wall"></div>
+      </section>
+    </section>
+    <section id="tripsPage" class="page">
+      <section class="vacation-page-hero trips-page-hero">
+        <div><span>Your travel board</span><h1>Keep every vacation plan ready to reopen.</h1><p>Save the current trip, compare past plans, and continue booking later.</p><button id="saveCurrentTrip" class="plan-button">Save Current Trip</button></div>
+      </section>
+      <div id="savedTrips" class="library-grid visual-library"></div>
+    </section>
+    <section id="checklistPage" class="page">
+      <section class="vacation-page-hero checklist-page-hero">
+        <div><span>Pack and go</span><h1>Finish the details before the vacation starts.</h1><p>Transportation, lodging, tickets, documents, and essentials for the selected travel type.</p></div>
+      </section>
+      <div id="fullChecklist" class="checklist-grid vacation-checklist"></div>
+    </section>
+    <section id="favoritesPage" class="page">
+      <section class="vacation-page-hero favorites-page-hero">
+        <div><span>Vacation inspiration</span><h1>Save the places you would actually want to visit.</h1><p>Keep hotels, beaches, attractions, and memorable stops together.</p></div>
+      </section>
+      <div id="favoritesGrid" class="library-grid visual-library"></div>
+    </section>
+  </main>
+</div>
+
+<dialog id="authDialog">
+  <div class="dialog-head"><h2>RouteWise Account</h2><button id="closeAuth">×</button></div>
+  <div class="auth-tabs"><button class="auth-tab active" data-form="login">Log in</button><button class="auth-tab" data-form="register">Create account</button></div>
+  <form id="loginForm" class="auth-form active"><label>Email<input id="loginEmail" type="email" required></label><label>Password<input id="loginPassword" type="password" required></label><button class="plan-button">Log in</button></form>
+  <form id="registerForm" class="auth-form"><label>Name<input id="registerName" required></label><label>Email<input id="registerEmail" type="email" required></label><label>Password<input id="registerPassword" type="password" required></label><button class="plan-button">Create account</button></form>
+  <p id="authMessage"></p>
+</dialog>
+
+<script src="cities-data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
